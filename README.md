@@ -8,6 +8,7 @@ The original Overleaf package is retained in `LEC_climatology_clim_dyn_vCBG/`. I
 
 Key files:
 
+- `main.tex`: top-level Overleaf proxy and Main document;
 - `LEC_climatology_clim_dyn_vCBG/sn-article_rev2.tex`: immutable published baseline;
 - `LEC_climatology_clim_dyn_vCBG/sn-article_correction.tex`: clean first-pass corrected manuscript;
 - `LEC_climatology_clim_dyn_vCBG/sn-article_correction_diff.tex`: generated visual diff;
@@ -25,12 +26,29 @@ The five-versus-four cluster issue is resolved at the workflow level: the publis
 
 ## Compile the clean manuscript
 
-From the Overleaf-package directory:
+From the repository root, compile through the same proxy used by Overleaf:
+
+```bash
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The direct bundle compilation remains available for equivalence checks:
 
 ```bash
 cd LEC_climatology_clim_dyn_vCBG
 latexmk -pdf -interaction=nonstopmode -halt-on-error sn-article_correction.tex
 ```
+
+## Overleaf workflow
+
+1. Create a **new** Overleaf project with **Import from GitHub** and select this repository.
+2. Set the top-level `main.tex` as the Overleaf **Main document**.
+3. Edit manuscript content only in `LEC_climatology_clim_dyn_vCBG/sn-article_correction.tex`, and only after explicit author instruction.
+4. Never edit `LEC_climatology_clim_dyn_vCBG/sn-article_rev2.tex`.
+5. Never edit `LEC_climatology_clim_dyn_vCBG/sn-article_correction_diff.tex` manually; regenerate it with `scripts/build_diff.sh`.
+6. Synchronize GitHub and Overleaf only in explicit author/agent turns. Do not perform background or autonomous pushes or pulls.
+
+Use pdfLaTeX (validated locally with TeX Live 2024). The proxy follows [Overleaf's recommended subfolder workflow](https://docs.overleaf.com/getting-started/recompiling-your-project/the-main-document); `latexmkrc` adds the bundle to `TEXINPUTS`, `BSTINPUTS`, and `BIBINPUTS` while preserving existing and default search paths. Generated manuscript PDFs and build intermediates are ignored; required source files and the original cover-letter PDF remain versioned.
 
 ## Regenerate and compile the visual diff
 
@@ -49,8 +67,8 @@ The script requires `latexdiff`, `latexmk`, `pdflatex`, and `bibtex`, fails on e
 3. Confirm references and bibliography resolve without undefined-reference warnings.
 4. Inspect the diff PDF for red struck-through deletions and blue additions.
 5. Confirm each substantive clean-manuscript change has a `CORRECTION_MATRIX.md` entry.
-6. Do not commit or push until the authors review all `BLOCKED` and `NEEDS_AUTHOR_REVIEW` items.
+6. Do not commit or push until the author has reviewed the pending infrastructure or manuscript diff.
 
-## Checkout limitation
+## GitHub checkout
 
-This directory currently has no `.git` metadata, so `git status --short` is unavailable. Baseline immutability is being checked with SHA-256 until the repository metadata is restored.
+This is an active Git checkout of [`daniloceano/paper-lec-climatology-correction`](https://github.com/daniloceano/paper-lec-climatology-correction). Use Git status together with the recorded SHA-256 checksum to verify baseline immutability. Commits, pushes, pulls, and GitHub/Overleaf synchronization occur only after explicit author instruction.

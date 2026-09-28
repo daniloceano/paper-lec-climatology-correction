@@ -9,14 +9,25 @@ tmp/
 *.aux
 *.bbl
 *.blg
+*.bcf
+*.dvi
 *.fdb_latexmk
 *.fls
+*.lof
 *.log
+*.lot
+*.nav
 *.out
+*.ps
+*.run.xml
+*.snm
 *.synctex.gz
 *.toc
-*.lof
-*.lot
+*.vrb
+
+# Generated manuscript PDFs. Keep source PDFs from the original bundle.
+/main.pdf
+/LEC_climatology_clim_dyn_vCBG/sn-article*.pdf
 
 # Editor backup files
 *~

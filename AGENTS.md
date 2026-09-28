@@ -52,6 +52,13 @@ Do not merge a scientific edit that lacks a matrix entry.
 - Change only incorrect material and the minimum surrounding text needed for coherence.
 - Preserve the Springer Nature class, labels, citations, bibliography, section organization, and figure numbering where feasible.
 
+## Author control of manuscript prose
+
+- Do not autonomously rewrite `LEC_climatology_clim_dyn_vCBG/sn-article_correction.tex`.
+- Agents may audit the manuscript, propose exact patches for author review, update `CORRECTION_MATRIX.md`, regenerate `sn-article_correction_diff.tex`, and validate compilation.
+- Manuscript prose, equations, tables, captions, and scientific content may be changed only after explicit author instruction for that change.
+- Infrastructure-only authorization does not authorize manuscript edits.
+
 ## Uncertainty and conflicts
 
 - Never guess when evidence is incomplete or conflicting.
@@ -75,5 +82,6 @@ Do not merge a scientific edit that lacks a matrix entry.
 
 ## Version-control safety
 
-- Do not commit or push until the audit, compiled artifacts, diff, and repository status have been shown for author review.
-- This checkout currently lacks `.git` metadata. Until that is restored, use the recorded SHA-256 baseline checksum as the immutability check and report Git status as unavailable.
+- This is an active Git checkout of `daniloceano/paper-lec-climatology-correction`; use both Git status and the recorded SHA-256 checksum to verify baseline immutability.
+- Do not commit, push, pull, or synchronize with Overleaf autonomously. Perform each GitHub/Overleaf synchronization only in an explicit author/agent turn.
+- Before a requested commit or push, show the relevant diff, compiled validation, and repository status for author review.

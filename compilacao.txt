@@ -1,0 +1,9 @@
+# Na raiz
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+
+# Dentro de LEC_climatology_clim_dyn_vCBG/
+latexmk -pdf -interaction=nonstopmode -halt-on-error sn-article_correction.tex
+latexmk -g -pdf -interaction=nonstopmode -halt-on-error sn-article_correction.tex
+
+# Na raiz — script preservado
+./scripts/build_diff.sh
