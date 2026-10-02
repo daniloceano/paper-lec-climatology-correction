@@ -561,7 +561,7 @@ The four conversion terms are defined as follows, integrating over the atmospher
 \begin{align}
     &C_Z = \int_{p_t}^{p_b} - [\left([T]_\lambda)_\phi ([\omega]_\lambda\right)_\phi]_{\lambda\phi} \ \frac{R}{gp} \ dp \label{eq:CZ} \\
     &C_E = \int_{p_t}^{p_b} - [(T)_\lambda (\omega)_\lambda]_{\lambda\phi} \ \frac{R}{gp} \ dp \label{eq:CE} \\
-    &C_A = \int_{p_t}^{p_b} - \left( \frac{1}{2a\sigma}  \left[ (v)_\lambda (T)_\lambda  \frac{\partial  ([T]_\lambda)_\phi}{\partial \phi} \right]_{\lambda\phi} + \frac{1}{\sigma}  \left[ (\omega)_\lambda (T)_\lambda \frac{\partial  ([T]_\lambda)_\phi}{\partial p} \right]_{\lambda\phi} \right) dp \label{eq:CA} \\
+    &C_A = \int_{p_t}^{p_b} - \left( \frac{1}{a\sigma}  \left[ (v)_\lambda (T)_\lambda  \frac{\partial  ([T]_\lambda)_\phi}{\partial \phi} \right]_{\lambda\phi} + \frac{1}{\sigma}  \left[ (\omega)_\lambda (T)_\lambda \frac{\partial  ([T]_\lambda)_\phi}{\partial p} \right]_{\lambda\phi} \right) dp \label{eq:CA} \\
     \begin{split} &C_K = \int_{p_t}^{p_b} \frac{1}{g} \left(
     \left[ \frac{\cos\phi}{a} (u)_\lambda (v)_\lambda \frac{\partial}{\partial\phi} \left(\frac{[u]_\lambda}{\cos\phi}\right)\right]_{\lambda\phi} + \left[ \frac{{(v)_\lambda}^2}{a} \frac{\partial [v]_\lambda}{\partial\phi}  \right]_{\lambda\phi}  \right. \\
     &\left. + \left[ \frac{\tan\phi}{a} {(u)_\lambda}^2 [v]_\lambda  \right]_{\lambda\phi} + \left[ (\omega)_\lambda  (u)_\lambda \frac{\partial [u]_\lambda}{\partial p} \right]_{\lambda\phi} + \left[ (\omega)_\lambda  (v)_\lambda \frac{\partial [v]_\lambda}{\partial p} \right]_{\lambda\phi}  \right) dp \end{split} \label{eq:CK}
@@ -582,10 +582,10 @@ The APE generation and K dissipation terms are defined as:
 Here, $F_{\lambda}$ and $F_{\phi}$ represent the zonal and meridional frictional components, respectively, and $q$ is the diabatic heating term, computed as a residual from the thermodynamic equation:
 
 \begin{equation}
-    \frac{q}{c_p} = \frac{\partial T}{\partial t} - \Vec{V}_H \cdot \Vec{\nabla}_p T - S_p\omega
+    \frac{q}{c_p} = \frac{\partial T}{\partial t} + \Vec{V}_H \cdot \Vec{\nabla}_p T - S_p\omega
 \end{equation}
 
-where $-\Vec{V}_H \cdot \Vec{\nabla}_p T$ represents the horizontal advection of temperature and $S_p$ approximates the static stability, given by:
+where $\Vec{V}_H \cdot \Vec{\nabla}_p T$ represents the horizontal advection of temperature and $S_p$ approximates the static stability, given by:
 
 \begin{equation}
     S_p \equiv -\frac{T}{\theta}\frac{\partial \theta}{\partial p}
@@ -617,12 +617,51 @@ where $c_1=-\left[a\left(\lambda_2-\lambda_1\right)\left(\sin \varphi_2-\sin \va
 Lastly, the terms $B\Phi Z$ and $B\Phi E$ are given by:
 
 \begin{align}
-\mathrm{B} \Phi \mathrm{Z}= & c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{g}\left([v]_\lambda\left([\Phi]_\lambda\right)_{\varphi}\right)_{\lambda_1}^{\lambda_2} d \varphi d p \nonumber \\
-& +c_2 \int_{p_1}^{p_2} \frac{1}{g}\left(\cos \varphi[v]_\lambda\left([\Phi]_\lambda\right)_{\varphi}\right)_{\varphi_1}^{\varphi_2} d p  \\
-& -\frac{1} {g}\left(\left[\left([\omega]_\lambda\right)_{\varphi}\left([\Phi]_\lambda\right)_{\varphi}\right]_{\lambda_{\varphi}}\right)_{p_1}^{p_2} \nonumber \\
-\mathrm{~B} \Phi \mathrm{E}= & c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{g}\left((u)_\lambda(\Phi)_{\lambda_\lambda}\right)_{\lambda_1}^{\lambda_2} d \varphi d p \nonumber \\
-& +c_2 \int_{p_1}^{p_2} \frac{1}{g}\left(\left[(v)_\lambda(\Phi)_{\lambda_\lambda}\right]_\lambda \cos \varphi\right)_{\varphi_1}^{\varphi_2} d p \\
-& -\frac{1}{g}\left(\left[(\omega)_\lambda(\Phi)_\lambda\right]_{\lambda_{\varphi}}\right)_{p_1}^{p_2} \nonumber
+\mathrm{B}\Phi\mathrm{Z}
+={}& c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2}
+\frac{1}{g}
+\left(
+[u]_\lambda(\Phi)_\lambda
++(u)_\lambda\left([\Phi]_\lambda\right)_\varphi
+\right)_{\lambda_1}^{\lambda_2}
+\,d\varphi\,dp
+\nonumber \\
+&+c_2 \int_{p_1}^{p_2}
+\frac{1}{g}
+\left(
+\cos\varphi\,[v]_\lambda
+\left([\Phi]_\lambda\right)_\varphi
+\right)_{\varphi_1}^{\varphi_2}
+\,dp
+\nonumber \\
+&-\frac{1}{g}
+\left(
+\left[
+\left([\omega]_\lambda\right)_\varphi
+\left([\Phi]_\lambda\right)_\varphi
+\right]_{\lambda\varphi}
+\right)_{p_1}^{p_2}
+\\
+\mathrm{B}\Phi\mathrm{E}
+={}& c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2}
+\frac{1}{g}
+\left(
+(u)_\lambda(\Phi)_\lambda
+\right)_{\lambda_1}^{\lambda_2}
+\,d\varphi\,dp
+\nonumber \\
+&+c_2 \int_{p_1}^{p_2}
+\frac{1}{g}
+\left(
+\left[(v)_\lambda(\Phi)_\lambda\right]_\lambda
+\cos\varphi
+\right)_{\varphi_1}^{\varphi_2}
+\,dp
+\nonumber \\
+&-\frac{1}{g}
+\left(
+\left[(\omega)_\lambda(\Phi)_\lambda\right]_{\lambda\varphi}
+\right)_{p_1}^{p_2}.
 \end{align}
 
 \section*{Declarations}
