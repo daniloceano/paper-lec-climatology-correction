@@ -181,8 +181,8 @@ For computing the LEC, we used the the open-source Python application LorenzCycl
 \begin{flalign}
 \frac{\partial A_Z}{\partial t} &= BA_Z - C_Z - C_A + G_Z \\
 \frac{\partial A_E}{\partial t} &= BA_E - C_E + C_A + G_E \\
-\frac{\partial K_Z}{\partial t} &= BK_Z + C_Z - C_K + B\Phi_Z - D_Z \\
-\frac{\partial K_E}{\partial t} &= BK_E + C_E + C_K + B\Phi_E - D_E 
+\frac{\partial K_Z}{\partial t} &= BK_Z + C_Z + C_K + B\Phi_Z - D_Z \\
+\frac{\partial K_E}{\partial t} &= BK_E + C_E - C_K + B\Phi_E - D_E 
 \end{flalign}
 
 
@@ -515,7 +515,7 @@ Mathematical expressions used for the calculation of the Lorenz Energy Cycle (LE
 Firstly, we define the zonal mean of a variable $X$, between longitudes $\lambda_{1}$ and $\lambda_{2}$:
 
  \begin{equation}
-     [X]_\lambda = \frac{1}{\lambda_2 - \lambda_1} \int_{\lambda_2}^{\lambda_1} X d\lambda
+     [X]_\lambda = \frac{1}{\lambda_2 - \lambda_1} \int_{\lambda_1}^{\lambda_2} X d\lambda
  \end{equation}
 
 The eddy component of this variable is its deviation from the zonal mean:
@@ -527,7 +527,7 @@ The eddy component of this variable is its deviation from the zonal mean:
 The domain mean of the variable $X$, defined over the computational domain bounded by longitudes $\lambda_1$ and $\lambda_2$, and latitudes $\phi_1$ and $\phi_2$, is given by:
 
 \begin{equation}
-    [X]_{\lambda\phi} = \left(\frac{1}{\lambda_2 - \lambda_1}\right)  \left(\frac{1}{\sin\phi_2 - \sin\phi_1}\right) \int_{\lambda_2}^{\lambda_1} X cos\phi d\lambda d\phi 
+    [X]_{\lambda\phi} = \left(\frac{1}{\lambda_2 - \lambda_1}\right)  \left(\frac{1}{\sin\phi_2 - \sin\phi_1}\right)  \int_{\varphi_1}^{\varphi_2} \int_{\lambda_1}^{\lambda_2} X cos\phi d\lambda d\phi 
 \end{equation}
 
 Similarly, we define the deviation of the zonal mean from the domain mean:
@@ -595,23 +595,24 @@ where $\theta$ is the potential temperature.
 
 
 The boundary terms are given by:
-
 \begin{align}
-& \mathrm{BAZ}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2[\sigma]_{\lambda_{\varphi}}}\left(2\left([T]_\lambda\right)_{\varphi}(T)_\lambda u+{\left([T]_{\lambda_{\varphi}}\right)_{\varphi}}^2 u\right)_{\lambda_1}^{\lambda_2} \nonumber \\
-& \times d \varphi d p+c_2 \int_{p_1}^{p_2} \frac{1}{2[\sigma]_{\lambda \varphi}}\left(2\left[(v)_\lambda(T)_\lambda\right]_\lambda\left([T]_\lambda\right)_{\varphi} \cos \varphi \right. \left.+{\left([T]_\lambda\right)_{\varphi}}^2[v]_\lambda \cos \varphi\right)_{\varphi_1}^{\varphi_2} d p \nonumber \\
-& -\frac{1}{2[\sigma]_{\lambda \varphi}}\left(\left[2(\omega)_\lambda(T)_\lambda\right]_\lambda\left([T]_\lambda\right)_{\varphi}+\left[[\omega]_\lambda{\left([T]_\lambda\right)_{\varphi}}^2\right]_{\lambda_{\varphi}}\right)_{p_1}^{p_2} \\
-& \mathrm{BAE}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2[\sigma]_{\lambda \varphi}}\left[u{(T)_\lambda}^2\right]_{\lambda_1}^{\lambda_2} d \varphi d p \nonumber \\
-& +c_2 \int_{p_1}^{p_2} \frac{1}{2[\sigma]_{\lambda \varphi}}\left(\left[{(T)_\lambda}^2 v\right]_\lambda \cos \varphi\right)_{\varphi_1}^{^{\varphi_2}} d p \\
-& -\left(\frac{\left[\omega{(T)_\lambda}^2\right]_{\lambda \varphi}}{2[\sigma]_{\lambda \varphi}}\right)_{p_1}^{p_2} \nonumber \\
-& \mathrm{BKZ}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2 g}\left(u\left[u^2+v^2-{(u)_\lambda}^2-{(v)_\lambda}^2\right]\right)_{\lambda_1}^{\lambda_2} \nonumber \\
-& \times d \varphi d p+c_2 \int_{p_1}^{p_2} \frac{1}{2 g}\left(\left[v \cos \varphi \left[u^2+v^2\right.\right.\right. \left.\left.-{(u)_\lambda}^2-{(v)_\lambda}^2\right]\right]_{\varphi_1}^{\varphi_2} d p  \\
-& -\left(\frac{1}{2 g}\left[\omega\left[u^2+v^2-{(u)_\lambda}^2-{(v)_\lambda}^2\right]\right]_{\lambda \varphi}\right)_{p_1}^{p_2} \nonumber \\
-& \mathrm{BKE}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2 g}\left(u\left[{(u)_\lambda}^2+{(v)_\lambda}^2\right]\right)_{\lambda_1}^{\lambda_2} d \varphi d p \nonumber \\
-& +c_2 \int_{p_1}^{p_2} \frac{1}{2 g}\left(\left[v \cos \varphi\left[{(u)_\lambda}^2+{(v)_\lambda}^2\right]\right]_\lambda\right)_{\varphi_1}^{\varphi_2} d p \\
-& -\left(\frac{1}{2 g}\left[\omega\left[{(u)_\lambda}^2+{(v)_\lambda}^2\right]\right]_{\lambda \varphi}\right)_{p_1}^{p_2} \nonumber
+& \mathrm{BAZ}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2[\sigma]_{\lambda\varphi}}\left(2\left([T]_\lambda\right)_{\varphi}(T)_\lambda u+{\left([T]_\lambda\right)_{\varphi}}^2 u\right)_{\lambda_1}^{\lambda_2} \nonumber \\
+& \times d\varphi\,dp+c_2 \int_{p_1}^{p_2} \frac{1}{2[\sigma]_{\lambda\varphi}}\left(2\left[(v)_\lambda(T)_\lambda\right]_\lambda\left([T]_\lambda\right)_{\varphi}\cos\varphi \right. \left.+{\left([T]_\lambda\right)_{\varphi}}^2[v]_\lambda\cos\varphi\right)_{\varphi_1}^{\varphi_2} dp \nonumber \\
+& -\left(\frac{\left[2\left[(\omega)_\lambda(T)_\lambda\right]_\lambda\left([T]_\lambda\right)_{\varphi}+[\omega]_\lambda{\left([T]_\lambda\right)_{\varphi}}^2\right]_{\lambda\varphi}}{2[\sigma]_{\lambda\varphi}}\right)_{p_1}^{p_2} \\
+& \mathrm{BAE}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2[\sigma]_{\lambda\varphi}}\left[u{(T)_\lambda}^2\right]_{\lambda_1}^{\lambda_2} d\varphi\,dp \nonumber \\
+& +c_2 \int_{p_1}^{p_2} \frac{1}{2[\sigma]_{\lambda\varphi}}\left(\left[{(T)_\lambda}^2v\right]_\lambda\cos\varphi\right)_{\varphi_1}^{\varphi_2} dp \nonumber \\
+& -\left(\frac{\left[\omega{(T)_\lambda}^2\right]_{\lambda\varphi}}{2[\sigma]_{\lambda\varphi}}\right)_{p_1}^{p_2} \\
+& \mathrm{BKZ}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2g}\left(u\left[u^2+v^2-{(u)_\lambda}^2-{(v)_\lambda}^2\right]\right)_{\lambda_1}^{\lambda_2} \nonumber \\
+& \times d\varphi\,dp+c_2 \int_{p_1}^{p_2} \frac{1}{2g}\left(\left[v\cos\varphi\left(u^2+v^2-{(u)_\lambda}^2-{(v)_\lambda}^2\right)\right]_\lambda\right)_{\varphi_1}^{\varphi_2} dp \nonumber \\
+& -\left(\frac{1}{2g}\left[\omega\left(u^2+v^2-{(u)_\lambda}^2-{(v)_\lambda}^2\right)\right]_{\lambda\varphi}\right)_{p_1}^{p_2} \\
+& \mathrm{BKE}=c_1 \int_{p_1}^{p_2} \int_{\varphi_1}^{\varphi_2} \frac{1}{2g}\left(u\left[{(u)_\lambda}^2+{(v)_\lambda}^2\right]\right)_{\lambda_1}^{\lambda_2} d\varphi\,dp \nonumber \\
+& +c_2 \int_{p_1}^{p_2} \frac{1}{2g}\left(\left[v\cos\varphi\left({(u)_\lambda}^2+{(v)_\lambda}^2\right)\right]_\lambda\right)_{\varphi_1}^{\varphi_2} dp \nonumber \\
+& -\left(\frac{1}{2g}\left[\omega\left({(u)_\lambda}^2+{(v)_\lambda}^2\right)\right]_{\lambda\varphi}\right)_{p_1}^{p_2}
 \end{align}
 
-where $c_1=-\left[a\left(\lambda_2-\lambda_1\right)\left(\sin \varphi_2-\sin \varphi_1\right)\right]^{-1}, c_2=-[a$ $\left.x\left(\sin \varphi_2-\sin \varphi_1\right)\right]^{-1}$.
+where $c_1=-\left[a\left(\lambda_2-\lambda_1\right)
+\left(\sin\varphi_2-\sin\varphi_1\right)\right]^{-1}$
+and $c_2=-\left[a\left(\sin\varphi_2-\sin\varphi_1\right)\right]^{-1}$.
 
 
 Lastly, the terms $B\Phi Z$ and $B\Phi E$ are given by:
