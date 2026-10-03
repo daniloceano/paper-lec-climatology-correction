@@ -9,3 +9,8 @@ The comparison baseline is commit 4da1d34 (Align corrected LEC equations and pre
 - 04_track_changes_latexdiff.pdf: compiled 46-page review copy of the LaTeX diff.
 
 The PDF was built in a temporary directory using the article class and bibliography from the manuscript repository, the validated corrected-only main figures and supplementary figures from lec-climatology-rerun. Figure contents themselves are not marked by latexdiff; only textual changes are tracked. The original manuscript and correction matrix in the working tree were restored to 4da1d34 after these files were saved.
+
+## Published manuscript versus current manuscript
+
+- 05_published_to_current_latexdiff.tex and .pdf compare the immutable published sn-article_rev2.tex with the current sn-article_rev_post_corrections.tex. This includes earlier equation corrections as well as current prose changes.
+- The 47-page PDF was compiled using the project class and bibliography, original package figures for unchanged image references, and the corrected article figures for the new image references. Changes inside images are not tracked by latexdiff.
